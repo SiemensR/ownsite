@@ -1,4 +1,6 @@
-@import "_variables/var.scss";
+@import "_variables/_var.scss";
+@import "_colors/_colors.scss";
 
-
-
+body {
+    color: $color1;
+}
