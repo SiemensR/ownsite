@@ -4,6 +4,18 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var ftp = require('vinyl-ftp');
 var sass = require('gulp-sass');
+var autoprefixer = require('gulp-autoprefixer');
+var csso = require('gulp-csso');
+var del = require('del');
+var htmlmin = require('gulp-htmlmin');
+var runSequence = require('run-sequence');
+var myth = require('gulp-myth');
+var uglify = require('gulp-uglify');
+var livereload = require('gulp-livereload');
+var imagemin = require('gulp-imagemin');
+var concat = require('gulp-concat'); 
+var connect = require('connect'); 
+var lr = require('tiny-lr');
 require('dotenv').config();
 
 var user = process.env.USER;
@@ -16,7 +28,7 @@ var localFiles = [
 
 var remoteLocation = './www/';
 
-async function getFtpConnection(){
+function getFtpConnection() {
     return ftp.create({
         host: "anton-sementsov.bplaced.net",
         port: 21,
@@ -25,25 +37,53 @@ async function getFtpConnection(){
         parallel: 5,
         log: gutil.log
     })
-}
+};
 
 //deploy to remote server
-gulp.task('deploy',function(){
-    var conn = getFtpConnection();
+gulp.task('deploy', async function() {
+    var conn = getFtpConnection()
     return gulp.src(localFiles, {base: '.', buffer: false})
         .pipe(conn.newer(remoteLocation))
         .pipe(conn.dest(remoteLocation))
 });
 
 //compile sass
-gulp.task('sass', async function () {
-    gulp.src('src/scss/main.scss')
+ gulp.task('sass', async function () {
+     gulp.src('src/scss/main.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('dist/css'));
+    }); 
+
+gulp.task('scripts', function() {
+        return gulp.src('src/js/**/*.js')
+          // Minify the file
+          .pipe(uglify())
+          // Output
+          .pipe(gulp.dest('dist/js'))
     });
 
-//default    
-gulp.task('default', function(done) {  //<---- Insert 'done' as a parameter here...
-gulp.series('sass')
-done(); //<---- ...and call it here
-})
+// Gulp task to minify HTML files
+gulp.task('pages', function() {
+    return gulp.src(['./**/*.html'])
+      .pipe(htmlmin({
+        collapseWhitespace: true,
+        removeComments: true
+      }))
+      .pipe(gulp.dest('dist/'));
+  });
+
+  gulp.task('watch', function() {
+    gulp.watch('src/scss/**/*.scss', gulp.series('sass'));
+    gulp.watch('src/js/*.js', gulp.series('scripts'));
+  //  gulp.watch('src/img/*', gulp.series('images')); deactivated because not used
+  });
+
+  // Clean assets
+function clean() {
+    return del(["./dist/"]);
+  }
+
+  const build = gulp.series(clean, gulp.parallel('sass','scripts'));
+
+  exports.default = build; 
+  exports.build = build; 
