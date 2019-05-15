@@ -16,6 +16,7 @@ var imagemin = require('gulp-imagemin');
 var concat = require('gulp-concat'); 
 var connect = require('connect'); 
 var lr = require('tiny-lr');
+var livereload = require('gulp-livereload');
 require('dotenv').config();
 
 var user = process.env.USER;
@@ -49,7 +50,7 @@ gulp.task('deploy', async function() {
 
 //compile sass
  gulp.task('sass', async function () {
-     gulp.src('src/scss/main.scss')
+     gulp.src('src/scss/**/*.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('dist/css'));
     }); 
@@ -61,6 +62,12 @@ gulp.task('scripts', function() {
           // Output
           .pipe(gulp.dest('dist/js'))
     });
+
+gulp.task('copy', async function() {
+      gulp.src('src/template/**/*.php').pipe(gulp.dest('dist/template/'))
+      gulp.src('src/content/**/*.php').pipe(gulp.dest('dist/content/'));
+     ;
+  });
 
 // Gulp task to minify HTML files
 gulp.task('pages', function() {
@@ -83,7 +90,7 @@ function clean() {
     return del(["./dist/"]);
   }
 
-  const build = gulp.series(clean, gulp.parallel('sass','scripts'));
+  const build = gulp.series(clean, gulp.parallel('sass','scripts','copy'));
 
   exports.default = build; 
   exports.build = build; 
