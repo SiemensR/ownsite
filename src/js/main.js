@@ -1,3 +1,3 @@
-function mainAlert() {
-    alert('Hello');
-}
+$(document).ready(function(){
+    $('.carousel').carousel();
+});
