@@ -65,6 +65,7 @@ gulp.task('scripts', function() {
 
 gulp.task('copy', async function() {
       gulp.src('src/template/**/*.php').pipe(gulp.dest('dist/template/'))
+      gulp.src('src/helpers/**/*.php').pipe(gulp.dest('dist/helpers/'))
       gulp.src('src/content/**/*.php').pipe(gulp.dest('dist/content/'));
      ;
   });
