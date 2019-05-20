@@ -24,6 +24,8 @@ var password = process.env.PASSWORD;
 
 var localFiles = [
     './dist/**',
+    './music.php',
+    './video.php',
     './index.php'
 ];
 
