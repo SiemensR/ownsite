@@ -2,7 +2,7 @@
 if (file_exists('../../DEVMACHINE')) {
     $con = mysqli_connect("localhost","root","","ase");
 } else {
-    $con = mysql_connect("http://anton-sementsov.bplaced.net","anton-sementsov","8restartnew!","anton-sementsov");
+    $con = mysqli_connect("localhost","anton-sementsov","8restartnew!","anton-sementsov");
 };
 $_SESSION['password'] = "false";
 // Check connection
