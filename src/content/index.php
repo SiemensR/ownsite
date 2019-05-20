@@ -3,11 +3,11 @@
       <br>
       <!-- Start of input fields -->
       <div class="row">
-    <form class="col s12">
+    <form class="col s12" method="post" action="dist/helpers/database.php">
       <div class="row">
         <div class="input-field col s12">
-          <input id="password" type="password" class="validate">
-          <label for="password">Password</label>
+          <input id="Password" type="Password" class="validate" name="password" required>
+          <label for="Password">Password</label>
         </div>
       </div>
       <div class="row">
