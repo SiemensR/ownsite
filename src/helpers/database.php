@@ -22,7 +22,7 @@ if(isset($_POST['password'])) {
         }
         Redirect('../../music.php', false);
     } else {
-        echo "Password was wrong<br>";
+        echo "Password was wrong<br><script type=\"text/javascript\">setTimeout(function(){ location.href = '../../index.php'; }, 2000);</script>";
     }; 
 
 }
