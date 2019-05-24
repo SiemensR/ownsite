@@ -85,6 +85,7 @@ gulp.task('pages', function() {
   gulp.task('watch', function() {
     gulp.watch('src/scss/**/*.scss', gulp.series('sass'));
     gulp.watch('src/js/*.js', gulp.series('scripts'));
+    gulp.watch('src/**/*.php', gulp.parallel('copy'));    
   //  gulp.watch('src/img/*', gulp.series('images')); deactivated because not used
   });
 
