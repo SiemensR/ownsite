@@ -26,7 +26,10 @@ var localFiles = [
     './dist/**',
     './music.php',
     './video.php',
-    './index.php'
+    './index.php',
+    './logout.php',
+    './.htaccess',
+    './.htpasswd'
 ];
 
 var remoteLocation = './www/';
