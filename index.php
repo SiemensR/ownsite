@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" href="dist/css/main.css">
-</head>
-<body>
-    <?php echo "<h2 class=\"set\">test 4</h2><br><button onClick=\"mainAlert()\">Press to check</button>"; ?>
-    <script src="dist/js/main.js"></script>
-</body>
-</html>
+<?php 
+session_start();
+$title = "Starting page";
+if (isset($_SESSION['userid'])) {
+    function Redirect($url, $permanent = false)
+    {
+        header('Location: ' . $url, true, $permanent ? 301 : 302);
+        exit();
+    }
+    Redirect('music.php', false);
+} else {
+    require('dist/template/header/meta.php');
+    require('dist/content/index.php');
+    require('dist/template/footer/footer.php');    
+};

@@ -1,10 +1,14 @@
 @import "_variables/_var.scss";
 @import "_colors/_colors.scss";
 
-body {
-    color: $color1;
+.player {
+    margin-top: 25px;
 }
 
-.set {
-    color: blue;
+audio {
+    width: 100%;
+}
+
+video {
+    width: 100%;
 }

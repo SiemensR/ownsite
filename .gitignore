@@ -6,3 +6,8 @@
 /node_modules
 .env
 package-lock.json
+.sql
+DEVMACHINE
+*.ini
+.htaccess
+.htpasswd
