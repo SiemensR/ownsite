@@ -1,3 +1,4 @@
+<?php require('dist/template/body/navigation.php'); ?>
 <div class="container">
     <!-- Page Content goes here -->
     <div class="row">

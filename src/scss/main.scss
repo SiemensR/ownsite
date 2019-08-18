@@ -1,6 +1,14 @@
 @import "_variables/_var.scss";
 @import "_colors/_colors.scss";
 
+nav {
+    background-color: $nav_color;
+} 
+
+nav ul a {
+    font-size: 1.5rem;
+}
+
 .player {
     margin-top: 25px;
 }
@@ -9,6 +17,12 @@ audio {
     width: 100%;
 }
 
+.logo {
+    width: 5.2rem;
+    height: 5.2rem;
+}
+
 video {
     width: 100%;
 }
+
